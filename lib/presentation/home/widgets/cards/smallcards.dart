@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:music_app/presentation/home/screens/splash_screen/splash_screen.dart';
 import 'package:music_app/presentation/home/widgets/buttons/Iconbutton.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 import 'package:music_app/service/artists_api/artistscard_api/artists_model.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:music_app/presentation/home/screens/splash_screen/splash_screen.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 import 'package:music_app/service/artists_api/artistsmidcardsapi/api.dart';
 import 'package:music_app/service/artists_api/artistsmidcardsapi/model.dart';
@@ -71,10 +70,7 @@ class MidCardScreen extends ConsumerWidget {
         error: (err, s) => Text(err.toString(),
          style: TextStyle(color: Colors.red),
         ),
-        loading: () => const Padding(
-          padding: EdgeInsets.only(left: 20, top: 0),
-          child: SplashScreen(),
-        ),
+        loading: () => const Text('Loading'),
       ),
     );
   }
