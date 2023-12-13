@@ -13,7 +13,7 @@ class BigCard extends StatelessWidget {
       height: 140,
       width: 280,
         decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
         image: DecorationImage(
         image: AssetImage(image), 
         fit: BoxFit.cover, 

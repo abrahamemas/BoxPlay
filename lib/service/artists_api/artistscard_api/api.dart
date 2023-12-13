@@ -11,7 +11,7 @@ class ApiService {
   ApiService();
   Future<List<ArtistsModel>> getArtists() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=trap');
+      Response response = await _dio.get('$endpoint/search?q=pop');
       if (response.statusCode == 200) {
         List<ArtistsModel>? artistsList = [];
 
@@ -43,7 +43,7 @@ class ApiService {
   }
    Future<List<ArtistsModelTitle>> getArtistsTitle() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=trap');
+      Response response = await _dio.get('$endpoint/search?q=pop');
       if (response.statusCode == 200) {
         List<ArtistsModelTitle> artistsList = [];
 

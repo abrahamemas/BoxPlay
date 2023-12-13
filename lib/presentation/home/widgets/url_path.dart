@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 class UrlPath extends StatelessWidget {
   final String UrlPath1;
-  const UrlPath({super.key, required this.UrlPath1});
+  const UrlPath({super.key, required this.UrlPath1, required int size});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:music_app/presentation/home/screens/home_screen/home_screen.dart';
 // ignore: unused_import
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:music_app/presentation/home/screens/home_screen/home_screen.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 

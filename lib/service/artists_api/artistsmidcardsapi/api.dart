@@ -11,7 +11,7 @@ class Api {
   Api();
   Future<List<Model>> getArtistsCover() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=trap');
+      Response response = await _dio.get('$endpoint/search?q=edm');
       if (response.statusCode == 200) {
         List<Model>? artistscoverList = [];
 
@@ -43,7 +43,7 @@ class Api {
   }
    Future<List<ModelTitle>> getArtistsTitleCover() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=trap');
+      Response response = await _dio.get('$endpoint/search?q=edm');
       if (response.statusCode == 200) {
         List<ModelTitle> artistsTitleList2 = [];
 
@@ -53,7 +53,7 @@ class Api {
 
         artistsTitleList2 = artistDataList2
             .map((artistData2) {
-              String title = artistData2['ablum']['title'];
+              String title = artistData2['album']['title'];
               if (!uniqueTitles.contains(title)) {
                 uniqueTitles.add(title);
                 return ModelTitle.fromJson(artistData2['album']);
@@ -80,9 +80,9 @@ final artistscoverDataProvider = FutureProvider<List<Model>>((ref) async {
   final apicoverservices = ref.read(artistscoverProvider);
   return apicoverservices.getArtistsCover();
 });
-final artistsTitleProvider2 = Provider<Api>((ref) => Api());
+final artistsTitle2 = Provider<Api>((ref) => Api());
 
 final artistsTitleDataProvider2 = FutureProvider<List<ModelTitle>>((ref) async {
-  final apiservices2 = ref.read(artistsTitleProvider2);
+  final apiservices2 = ref.read(artistsTitle2);
   return apiservices2.getArtistsTitleCover();
 });

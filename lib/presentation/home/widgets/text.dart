@@ -32,13 +32,13 @@ class TextStyles {
         color: Theme.of(context).primaryColor,
       );
 
-  static TextStyle medieum(BuildContext context) => GoogleFonts.inter(
+  static TextStyle medium(BuildContext context) => GoogleFonts.inter(
         fontSize: 20,
         fontWeight: FontWeight.w500,
         color: Theme.of(context).primaryColor,
       );
 
-  static TextStyle medieum2(BuildContext context) => GoogleFonts.inter(
+  static TextStyle medium2(BuildContext context) => GoogleFonts.inter(
         fontSize: 20,
         fontWeight: FontWeight.w700,
         color: Theme.of(context).primaryColor,

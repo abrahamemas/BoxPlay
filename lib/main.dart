@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:music_app/presentation/home/widgets/cards/smallcards.dart';
 // ignore: unused_import
 import 'presentation/home/screens/home_screen/home_screen.dart';
 // ignore: unused_import
