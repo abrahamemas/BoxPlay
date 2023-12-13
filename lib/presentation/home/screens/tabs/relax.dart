@@ -11,17 +11,19 @@ class RelaxScreen extends StatefulWidget {
 class _RelaxScreenState extends State<RelaxScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-          Padding(
-            padding: EdgeInsets.only(left: 20, top: 30),
-          child: Text(
-            'Today’s Refreshing Song-Recommendations',
-            style: TextStyles.bigtext(context),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+            Padding(
+              padding: EdgeInsets.only(left: 20, top: 10),
+            child: Text(
+              'Today’s Refreshing Song-Recommendations',
+              style: TextStyles.bigtext(context),
+            ),
           ),
-        ),
-      ],
-
+        ],
+    
+      ),
     );
   }
 }

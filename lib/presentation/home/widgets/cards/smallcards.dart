@@ -72,10 +72,7 @@ class SmallCardScreen extends ConsumerWidget {
           );
         },
         error: (err, s) => Text(err.toString()),
-        loading: () => const Padding(
-          padding: EdgeInsets.only(left: 20, top: 0),
-          child: SplashScreen(),
-        ),
+        loading: () => const Text('Loading')
       ),
     );
   }
