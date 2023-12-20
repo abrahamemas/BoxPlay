@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/presentation/home/widgets/cards/bigcards.dart';
-import 'package:music_app/presentation/home/widgets/cards/midcards.dart';
-import 'package:music_app/presentation/home/widgets/cards/smallcards.dart';
+import 'package:music_app/presentation/home/widgets/cards/for_you_cards/cards.dart';
+import 'package:music_app/presentation/home/widgets/cards/for_you_cards/midcards.dart';
+import 'package:music_app/presentation/home/widgets/cards/for_you_cards/smallcards.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 
 class For_You extends StatelessWidget {
@@ -29,7 +29,7 @@ class For_You extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return BigCard(
+                    return CardScreen(
                       text: cardTexts[index],
                       image: cardImages[index],
                       smallText: smallText[index],

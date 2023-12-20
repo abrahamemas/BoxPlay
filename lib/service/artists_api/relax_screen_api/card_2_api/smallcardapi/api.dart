@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:music_app/service/artists_api/artistsmidcardsapi/model.dart';
-import 'package:music_app/service/artists_api/artistsmidcardsapi/model_title.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/model.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/model_title.dart';
 
 class Api {
   static const String endpoint = 'https://api.deezer.com';
@@ -11,7 +11,7 @@ class Api {
   Api();
   Future<List<Model>> getArtistsCover() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=edm');
+      Response response = await _dio.get('$endpoint/search?q=michael jackson');
       if (response.statusCode == 200) {
         List<Model>? artistscoverList = [];
 
@@ -43,7 +43,7 @@ class Api {
   }
    Future<List<ModelTitle>> getArtistsTitleCover() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=edm');
+      Response response = await _dio.get('$endpoint/search?q=michael jackson');
       if (response.statusCode == 200) {
         List<ModelTitle> artistsTitleList2 = [];
 
@@ -74,15 +74,15 @@ class Api {
     }
   }
 }
-final artistscoverProvider = Provider<Api>((ref) => Api());
+final artistscoverprovider2 = Provider<Api>((ref) => Api());
 
-final artistscoverDataProvider = FutureProvider<List<Model>>((ref) async {
-  final apicoverservices = ref.read(artistscoverProvider);
+final artistscoverdataprovider2 = FutureProvider<List<Model>>((ref) async {
+  final apicoverservices = ref.read(artistscoverprovider2);
   return apicoverservices.getArtistsCover();
 });
-final artistsTitle2 = Provider<Api>((ref) => Api());
+final artistsTitle5 = Provider<Api>((ref) => Api());
 
-final artistsTitleDataProvider2 = FutureProvider<List<ModelTitle>>((ref) async {
-  final apiservices2 = ref.read(artistsTitle2);
+final artistsTitledataprovider5 = FutureProvider<List<ModelTitle>>((ref) async {
+  final apiservices2 = ref.read(artistsTitle5);
   return apiservices2.getArtistsTitleCover();
 });

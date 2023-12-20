@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
-class BigCard extends StatelessWidget {
+class CardScreen extends StatelessWidget {
   final String smallText;
   final String text;
   
   final String image;
-  const BigCard({super.key,required this.image, required this.text, required this.smallText});
+  const CardScreen({super.key,required this.image, required this.text, required this.smallText});
 
   @override
   Widget build(BuildContext context) {

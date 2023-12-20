@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:music_app/service/artists_api/artistscard_api/artists_model.dart';
-import 'package:music_app/service/artists_api/artistscard_api/model_title.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistscard_api/artists_model.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistscard_api/model_title.dart';
 
 class ApiService {
   static const String endpoint = 'https://api.deezer.com';
@@ -11,7 +11,7 @@ class ApiService {
   ApiService();
   Future<List<ArtistsModel>> getArtists() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=pop');
+      Response response = await _dio.get('$endpoint/search?q=enya');
       if (response.statusCode == 200) {
         List<ArtistsModel>? artistsList = [];
 
@@ -43,7 +43,7 @@ class ApiService {
   }
    Future<List<ArtistsModelTitle>> getArtistsTitle() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=pop');
+      Response response = await _dio.get('$endpoint/search?q=enya');
       if (response.statusCode == 200) {
         List<ArtistsModelTitle> artistsList = [];
 
@@ -75,15 +75,15 @@ class ApiService {
   }
 }
 
-final artistsProvider = Provider<ApiService>((ref) => ApiService());
-
-final artistsDataProvider = FutureProvider<List<ArtistsModel>>((ref) async {
-  final apiServices = ref.read(artistsProvider);
-  return apiServices.getArtists();
-});
 final artistsProvider2 = Provider<ApiService>((ref) => ApiService());
 
-final artistsTitleDataProvider = FutureProvider<List<ArtistsModelTitle>>((ref) async {
-  final apiService = ref.read(artistsProvider2);
+final artistsDataProvider2 = FutureProvider<List<ArtistsModel>>((ref) async {
+  final apiServices = ref.read(artistsProvider2);
+  return apiServices.getArtists();
+});
+final artistsProvider3 = Provider<ApiService>((ref) => ApiService());
+
+final artistsTitleDataProvider3 = FutureProvider<List<ArtistsModelTitle>>((ref) async {
+  final apiService = ref.read(artistsProvider3);
   return apiService.getArtistsTitle();
 });

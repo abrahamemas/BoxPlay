@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:music_app/presentation/home/screens/tabs/for_you.dart';
 import 'package:music_app/presentation/home/screens/tabs/relax.dart';
+import 'package:music_app/presentation/home/screens/tabs/workout.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 import 'package:music_app/presentation/home/widgets/url_path.dart';
 
@@ -70,8 +71,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     width: 40,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 280, top: 65),
-                    child: UrlPath(UrlPath1: 'assets/bell.svg', size: 24,),
+                    padding: EdgeInsets.only(left: 280, top: 55),
+                    child: IconButton(
+      onPressed: () {
+      },
+      icon: const Icon(
+        Icons.notifications,
+        size: 26,
+        color: Color.fromARGB(70, 255, 255, 255), 
+      ),
+    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 298, top: 20),
@@ -120,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: [
             Tab(child: For_You()),
             Tab(child: RelaxScreen()),
-            Tab(child: Text('Focus', style: TextStyles.text2(context))),
+            Tab(child: WorkoutScreen()),
             Tab(child: Text('Travel', style: TextStyles.text2(context))),
             Tab(child: Text('Energize', style: TextStyles.text2(context))),
           ],

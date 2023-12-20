@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_app/presentation/home/widgets/buttons/Iconbutton.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
-import 'package:music_app/service/artists_api/artistscard_api/artists_model.dart';
-import 'package:music_app/service/artists_api/artistscard_api/api.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistscard_api/artists_model.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistscard_api/api.dart';
 
 class SmallCardScreen extends ConsumerWidget {
   const SmallCardScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class SmallCardScreen extends ConsumerWidget {
           return ListView.separated(
             padding: const EdgeInsets.only(right: 30),
             scrollDirection: Axis.horizontal,
-            itemCount: artistsList.length,
+            itemCount: 13,
             itemBuilder: (BuildContext context, index) {
               return Stack(
                 children: [
@@ -36,11 +36,9 @@ class SmallCardScreen extends ConsumerWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
+                    child: IconButtonPlay(height: 24, size: 16,),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 0, top: 130),
-                    child: IconButtonPlay(),
-                  ),
+                  
                   data2.when(
                     data: (artistsList2) {
                       return Padding(
@@ -49,8 +47,7 @@ class SmallCardScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              
-                              child: Text(
+                                child: Text(
                                 artistsList2[index].title,
                                 style: TextStyles.smalltext(context),
                                 maxLines: 2,
@@ -62,7 +59,7 @@ class SmallCardScreen extends ConsumerWidget {
                       );
                     },
                     error: (err, s) => Text(err.toString()),
-                    loading: () => const CircularProgressIndicator(),
+                    loading: () => const Text('Loading'),
                   ),
                 ],
               );
