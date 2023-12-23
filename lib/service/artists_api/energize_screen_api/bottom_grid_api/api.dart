@@ -6,16 +6,17 @@ import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcards
 class Api {
   static const String endpoint = 'https://api.deezer.com';
 
-    Dio _dio = Dio(
+  Dio _dio = Dio(
     BaseOptions(
     baseUrl: endpoint,
     connectTimeout: Duration(seconds: 1) ,
   ),
   );
+
   Api();
   Future<List<Model>> getArtistsCover() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=old school');
+      Response response = await _dio.get('$endpoint/search?q=davido');
       if (response.statusCode == 200) {
         List<Model>? artistscoverList = [];
 
@@ -47,7 +48,7 @@ class Api {
   }
    Future<List<ModelTitle>> getArtistsTitleCover() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=old school');
+      Response response = await _dio.get('$endpoint/search?q=davido');
       if (response.statusCode == 200) {
         List<ModelTitle> artistsTitleList2 = [];
 
@@ -78,15 +79,15 @@ class Api {
     }
   }
 }
-final artistscoverProvider3 = Provider<Api>((ref) => Api());
+final artistsBottomProvider3 = Provider<Api>((ref) => Api());
 
-final artistscoverDataProvider3 = FutureProvider<List<Model>>((ref) async {
-  final apicoverservices = ref.read(artistscoverProvider3);
+final artistsBottomDataProvider3 = FutureProvider<List<Model>>((ref) async {
+  final apicoverservices = ref.read(artistsBottomProvider3);
   return apicoverservices.getArtistsCover();
 });
-final artistsTitle7 = Provider<Api>((ref) => Api());
+final artistsBottomTitle3 = Provider<Api>((ref) => Api());
 
-final artistsTitleDataProvider7 = FutureProvider<List<ModelTitle>>((ref) async {
-  final apiservices2 = ref.read(artistsTitle7);
+final artistsBottomTitleDataProvider3 = FutureProvider<List<ModelTitle>>((ref) async {
+  final apiservices2 = ref.read(artistsBottomTitle3);
   return apiservices2.getArtistsTitleCover();
 });

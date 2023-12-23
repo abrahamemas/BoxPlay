@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:music_app/presentation/home/widgets/buttons/popupmenu_2.dart';
-import 'package:music_app/presentation/home/widgets/cards/workout_list/card_1.dart';
-import 'package:music_app/presentation/home/widgets/cards/workout_list/grid.dart';
+import 'package:music_app/presentation/home/widgets/cards/sad_list/card_1.dart';
+import 'package:music_app/presentation/home/widgets/cards/sad_list/grid.dart';
 
 
-class WorkoutListScreen extends StatelessWidget {
-  const WorkoutListScreen({super.key});
+class SadListScreen extends StatelessWidget {
+  const SadListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class WorkoutListScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: WorkoutSmallCard(startIndex: startIndex),
+                    child: SadSmallCard(startIndex: startIndex),
                   ),
                    
                   Transform.translate(
@@ -47,7 +47,7 @@ class WorkoutListScreen extends StatelessWidget {
                 width: 800,
                 child: Padding(
                       padding: const EdgeInsets.only(left: 5),
-                      child: GridCard(),
+                      child: GridCard2(),
                     ),
               ),
                 

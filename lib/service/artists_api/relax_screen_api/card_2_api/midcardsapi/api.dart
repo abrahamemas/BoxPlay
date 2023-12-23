@@ -5,8 +5,12 @@ import 'package:music_app/service/artists_api/for_you_screen_api/artistscard_api
 
 class ApiService {
   static const String endpoint = 'https://api.deezer.com';
-
-  Dio _dio = Dio();
+  Dio _dio = Dio(
+    BaseOptions(
+    baseUrl: endpoint,
+    connectTimeout: Duration(seconds: 1) ,
+  ),
+  );
 
   ApiService();
   Future<List<ArtistsModel>> getArtists() async {

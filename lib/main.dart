@@ -21,7 +21,7 @@ class MusicApp extends StatelessWidget {
         hintColor: Color(0x80FFFFFF),
         hoverColor: Color(0xff1F1F1F)
       ),
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
     
   }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:music_app/presentation/home/widgets/cards/workout_list/workout_list.dart';
+import 'package:music_app/presentation/home/widgets/cards/sad_list/sad_list.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 
-class WorkoutScreen extends StatefulWidget {
-  const WorkoutScreen({super.key});
+class SadScreen extends StatefulWidget {
+  const SadScreen({super.key});
 
   @override
-  State<WorkoutScreen> createState() => _WorkoutScreenState();
+  State<SadScreen> createState() => _SadScreenState();
 }
 
-class _WorkoutScreenState extends State<WorkoutScreen> {
+class _SadScreenState extends State<SadScreen> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -38,7 +38,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                        Expanded(
                          child: Padding(
                                        padding: const EdgeInsets.only(left: 15,top: 15),
-                                       child: WorkoutListScreen(),
+                                       child: SadListScreen(),
                                      ),
                       
                        ),
@@ -74,14 +74,14 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 18, top: 380),
                       child: Text(
-                        'MORE FROM J.COLE',
+                        'MORE FROM BILLIE EILISH',
                         style: TextStyles.smalltext(context),
                       ),
                   ), 
           Padding(
                         padding: EdgeInsets.only(left: 18, top: 405),
                       child: Text(
-                        'J.COLE',
+                        'BILLIE EILISH',
                         style: TextStyles.bigtext(context),
                       ),
                   ),   

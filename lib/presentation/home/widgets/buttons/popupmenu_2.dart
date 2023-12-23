@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Popup extends StatelessWidget {
-  const Popup({super.key});
+class Popup2 extends StatelessWidget {
+  const Popup2({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 280,
+      height: 400,
       child: ListView.separated(
         itemCount: 4,
         scrollDirection: Axis.vertical,
@@ -53,7 +53,7 @@ class Popup extends StatelessWidget {
                        
                      ),
                   );  
-         },                               separatorBuilder: (context, _) => const SizedBox(height: 5),
+         },                               separatorBuilder: (context, _) => const SizedBox(height: 30),
          
        
     

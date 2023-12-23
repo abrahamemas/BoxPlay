@@ -16,7 +16,7 @@ class ApiService {
   ApiService();
   Future<List<ArtistsModel>> getArtists() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=enya');
+      Response response = await _dio.get('$endpoint/search?q=workout');
       if (response.statusCode == 200) {
         List<ArtistsModel>? artistsList = [];
 
@@ -48,7 +48,7 @@ class ApiService {
   }
    Future<List<ArtistsModelTitle>> getArtistsTitle() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=enya');
+      Response response = await _dio.get('$endpoint/search?q=workout');
       if (response.statusCode == 200) {
         List<ArtistsModelTitle> artistsList = [];
 
@@ -80,15 +80,15 @@ class ApiService {
   }
 }
 
-final artistsProvider2 = Provider<ApiService>((ref) => ApiService());
+final artistsProvider5 = Provider<ApiService>((ref) => ApiService());
 
-final artistsDataProvider2 = FutureProvider<List<ArtistsModel>>((ref) async {
-  final apiServices = ref.read(artistsProvider2);
+final artistsDataProvider5 = FutureProvider<List<ArtistsModel>>((ref) async {
+  final apiServices = ref.read(artistsProvider5);
   return apiServices.getArtists();
 });
-final artistsProvider3 = Provider<ApiService>((ref) => ApiService());
+final artistsProvider8 = Provider<ApiService>((ref) => ApiService());
 
-final artistsTitleDataProvider3 = FutureProvider<List<ArtistsModelTitle>>((ref) async {
-  final apiService = ref.read(artistsProvider3);
+final artistsTitleDataProvider8 = FutureProvider<List<ArtistsModelTitle>>((ref) async {
+  final apiService = ref.read(artistsProvider8);
   return apiService.getArtistsTitle();
 });
