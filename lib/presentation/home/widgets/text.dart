@@ -16,8 +16,8 @@ class TextStyles {
 
   static TextStyle text3(BuildContext context) => GoogleFonts.inter(
         fontSize: 16,
-        fontWeight: FontWeight.w700,
-        color: Theme.of(context).primaryColor,
+        fontWeight: FontWeight.w500,
+        color: Theme.of(context).hintColor,
       );
 
   static TextStyle smalltext(BuildContext context) => GoogleFonts.inter(
@@ -25,8 +25,13 @@ class TextStyles {
         fontWeight: FontWeight.w500,
         color: Theme.of(context).primaryColor,
       );
+  static TextStyle smalltext2(BuildContext context) => GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: Theme.of(context).hintColor,
+      );
 
-  static TextStyle smalltext1(BuildContext context) => GoogleFonts.inter(
+  static TextStyle smalltext3(BuildContext context) => GoogleFonts.inter(
         fontSize: 12,
         fontWeight: FontWeight.w700,
         color: Theme.of(context).primaryColor,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
-import 'package:music_app/service/artists_api/for_you_screen_api/artistscard_api/artists_model.dart';
+import 'package:music_app/service/artists_api/relax_screen_api/card_1_api/midcardsapi/artists_model.dart';
 import 'package:music_app/service/artists_api/relax_screen_api/card_3_api/midcardsapi/api.dart';
 
 class RelaxMidCard3 extends ConsumerWidget {
@@ -9,23 +9,26 @@ class RelaxMidCard3 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final data = ref.watch(artistsDataProvider4);
-    final data2 = ref.watch(artistsTitleDataProvider5);
+    final data = ref.watch(artistsDataProvider10);
+    final data2 = ref.watch(artistsTitleDataProvider11);
 
-    return Stack(
-      children: [
-        data.when(
-          data: (data) {
-            List<ArtistsModel> artistscoverList = data.map((e) => e).toList();
-            return SizedBox(
-              height: 106,
-              child: Stack(
+    return GestureDetector(
+      onTap: () {},
+      child: Stack(
+        children: [
+          data.when(
+            data: (data) {
+              List<ArtistsModel> artistscoverList = data.map((e) => e).toList();
+              return SizedBox(
+                  height: 106,
+                  child: Stack(
                     children: [
                       Container(
                         height: 106,
                         width: 106,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
+                          color: Theme.of(context).hoverColor,
                           image: DecorationImage(
                             image: NetworkImage(artistscoverList[0].picture),
                             fit: BoxFit.cover,
@@ -39,13 +42,26 @@ class RelaxMidCard3 extends ConsumerWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Container(
-                                  width: 100,
-                                  child: Text(
-                                    artistsTitleList2[0].title,
-                                    style: TextStyles.medium2(context),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                                Expanded(
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        width: 200,
+                                        child: Text(
+                                          artistsTitleList2[0].title,
+                                          style: TextStyles.medium2(context),
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 26),
+                                        child: Text(
+                                          '40 songs',
+                                          style: TextStyles.text3(context),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -56,39 +72,26 @@ class RelaxMidCard3 extends ConsumerWidget {
                         loading: () => const Text(
                           'Loading',
                           style: TextStyle(
-                          color:  Colors.transparent,
-                          
+                            color: Colors.transparent,
                           ),
-
-                          ),
+                        ),
                       ),
-                        
-
-                      
-                     
-
-
-
                     ],
-                  )
-            );
-          },
-          error: (err, s) => Text(
-           err.toString(),
-            style: TextStyle(color: Colors.red),
-          ),
-          loading: () => const Text(
-            'Loading',
-            style: TextStyle(
-            color:  Colors.transparent,
-
+                  ));
+            },
+            error: (err, s) => Text(
+              err.toString(),
+              style: TextStyle(color: Colors.red),
+            ),
+            loading: () => const Text(
+              'Loading',
+              style: TextStyle(
+                color: Colors.transparent,
+              ),
             ),
           ),
-        ),
-      
-  
-
-      ],
+        ],
+      ),
     );
   }
 }

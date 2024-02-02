@@ -1,13 +1,12 @@
-class ModelTitle {
+class ArtistsModelTitle {
   final String title;
 
-  ModelTitle({
+  ArtistsModelTitle({
     required this.title,
   });
-
-  factory ModelTitle.fromJson(Map<String, dynamic> json) {
-    return ModelTitle(
-      title: json['title'],
+  factory ArtistsModelTitle.fromJson(Map<String, dynamic> json) {
+    return ArtistsModelTitle(
+      title: json['name'] ?? '',
     );
   }
 }

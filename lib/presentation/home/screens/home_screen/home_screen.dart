@@ -16,13 +16,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String _greeting = '';
-  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _updateGreeting();
-    _tabController = TabController(length: 5, vsync: this);
   }
 
   void _updateGreeting() {
@@ -39,27 +37,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            SliverAppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              floating: false,
-              pinned: true,
-              title: Stack(
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        appBar: AppBar(
+          elevation: 0.0,
+          centerTitle: true,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Stack(
+            children: [
+              Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 0, top: 17),
+                    padding: const EdgeInsets.only(left: 0, top: 5),
                     child: Column(
-
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 60),
-                          child: Text(
-                            'Welcome,',
-                            style: TextStyles.text(context),
-                          ),
+                        Text(
+                          'Welcome,',
+                          style: TextStyles.text(context),
                         ),
                         SizedBox(
                           height: 1,
@@ -72,107 +69,127 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                   SizedBox(
-                    width: 40,
+                    width: 50,
                   ),
-                   Padding(
-                    padding: EdgeInsets.only(left: 330, top: 18),
-                    child: IconButton(
-                      onPressed: () {
-                    },
-                     icon: const Icon(
-                      Icons.account_circle_outlined,
-                       size: 26,
-                        color: Color.fromARGB(70, 255, 255, 255), 
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 90, top: 18),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.notifications,
+                          size: 26,
+                          color: Color.fromARGB(70, 255, 255, 255),
+                        ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 290, top: 18),
+                    padding: EdgeInsets.only(left: 100, top: 18),
                     child: IconButton(
-                      onPressed: () {
-                    },
-                     icon: const Icon(
-                      Icons.notifications,
-                       size: 26,
-                        color: Color.fromARGB(70, 255, 255, 255), 
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.account_circle_outlined,
+                        size: 26,
+                        color: Color.fromARGB(70, 255, 255, 255),
                       ),
                     ),
                   ),
-                 
-                 
                 ],
               ),
-              bottom: PreferredSize(
-                preferredSize: Size.fromHeight(80), 
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Container(
-                   margin: EdgeInsets.all(10),
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    child: TabBar(
-                      controller: _tabController,
-                      isScrollable: true,
-                      labelPadding: EdgeInsets.symmetric(horizontal: 20),
-                      indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Theme.of(context).hoverColor,
-                      ),
-                      tabs: [
-                        Tab(child: Text('For you', style: TextStyles.text2(context))),
-                        Tab(child: Text('Relax', style: TextStyles.text2(context))),
-                        Tab(child: Text('Workout', style: TextStyles.text2(context))),
-                        Tab(child: Text('Sad', style: TextStyles.text2(context))),
-                        Tab(child: Text('Energize', style: TextStyles.text2(context))),
-                      ],
-                    ),
+            ],
+          ),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(58),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Container(
+                height: 45,
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(25)),
+                child: TabBar(
+                  overlayColor: MaterialStateProperty.all(Colors.transparent),
+                  dividerColor: Theme.of(context).scaffoldBackgroundColor,
+                  labelPadding: EdgeInsets.symmetric(horizontal: 4),
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  unselectedLabelColor: Colors.transparent,
+                  indicatorColor: Colors.transparent,
+                  indicatorWeight: 2.0,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Theme.of(context).hoverColor,
                   ),
+                  tabs: [
+                    Tab(
+                        child:
+                            Text('For you', style: TextStyles.text2(context))),
+                    Tab(child: Text('Relax', style: TextStyles.text2(context))),
+                    Tab(
+                        child:
+                            Text('Workout', style: TextStyles.text2(context))),
+                    Tab(child: Text('Sad', style: TextStyles.text2(context))),
+                    Tab(
+                        child:
+                            Text('Energize', style: TextStyles.text2(context))),
+                  ],
                 ),
               ),
             ),
-          ];
-        },
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            Tab(child: For_You()),
-            Tab(child: RelaxScreen()),
-            Tab(child: WorkoutScreen()),
-            Tab(child: SadScreen()),
-            Tab(child: EnergizeScreen()),
-          ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 744,
+                child: TabBarView(
+                  children: [
+                    For_You(),
+                    RelaxScreen(),
+                    WorkoutScreen(),
+                    SadScreen(),
+                    EnergizeScreen(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: Container(
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Color(0x000000).withOpacity(0.8),
+            unselectedItemColor: Theme.of(context).primaryColor,
+            selectedItemColor: Theme.of(context).primaryColor,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            items: [
+              BottomNavigationBarItem(
+                icon: UrlPath(
+                  UrlPath1: 'assets/home2.svg',
+                  size: 24,
+                ),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: UrlPath(
+                  UrlPath1: 'assets/search.svg',
+                  size: 24,
+                ),
+                label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                icon: UrlPath(
+                  UrlPath1: 'assets/library_music.svg',
+                  size: 24,
+                ),
+                label: 'Your Library',
+              ),
+            ],
+          ),
         ),
       ),
-    bottomNavigationBar: BottomNavigationBar(
-  type: BottomNavigationBarType.fixed,
-  backgroundColor: Color(0x000000).withOpacity(0.5),
-  unselectedItemColor: Theme.of(context).primaryColor ,
-  selectedItemColor: Theme.of(context).primaryColor,
-  showSelectedLabels: true,
-  showUnselectedLabels: true,
-  items: [
-    BottomNavigationBarItem(
-      icon: UrlPath(UrlPath1: 'assets/home2.svg',
-      size:24,
-      ),
-      label: 'Home',
-      
-
-    ),
-    BottomNavigationBarItem(
-     icon: UrlPath(UrlPath1: 'assets/search.svg',
-      size:24,
-      ),
-      label: 'Search',
-    ),
-    BottomNavigationBarItem(
-      icon: UrlPath(UrlPath1: 'assets/library_music.svg',
-      size:24,
-      ),
-      label: 'Your Library',
-    ),
-  ],
-),
-
     );
   }
 }

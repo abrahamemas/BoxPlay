@@ -5,20 +5,44 @@ import 'package:music_app/presentation/home/widgets/cards/for_you_cards/smallcar
 import 'package:music_app/presentation/home/widgets/text.dart';
 
 class For_You extends StatelessWidget {
-  final List<String> smallText = ['New', 'Weekly', 'Best', 'Chilled', 'Executive'];
-  final List<String> cardTexts = ['ENGLISH \nSONGS', 'TOP 20', 'AFROBEATS', 'RHYTHM\nSOUL', 'HIP\nPOP'];
-  final List<String> cardImages = ['assets/Card9.jpg', 'assets/Card6.jpg', 'assets/Card7.jpg', 'assets/Card5.jpg', 'assets/Card2.jpg'];
+  final List<String> smallText = [
+    'New',
+    'Weekly',
+    'Best',
+    'Chilled',
+    'Executive'
+  ];
+  final List<String> cardTexts = [
+    'ENGLISH \nSONGS',
+    'TOP 20',
+    'AFRO\nBEATS',
+    'RHYTHM\nSOUL',
+    'HIP POP'
+  ];
+  final List<String> cardImages = [
+    'assets/Card9.jpg',
+    'assets/Card6.jpg',
+    'assets/Card7.jpg',
+    'assets/Card5.jpg',
+    'assets/Card2.jpg'
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
+      padding: const EdgeInsets.only(top: 10),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(right: 188, top: 5 ),
-              child: Text('Featuring Today', style: TextStyles.bigtext(context)),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 15, top: 5),
+                  child: Text('Featuring Today',
+                      style: TextStyles.bigtext(context)),
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.only(left: 0, top: 20),
@@ -39,22 +63,25 @@ class For_You extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 16),
             Padding(
               padding: EdgeInsets.only(left: 15, top: 25),
               child: Row(
                 children: [
                   Text('Recently Played', style: TextStyles.bigtext(context)),
-                  SizedBox(width: 90),
-                  Text('See more', style: TextStyles.text2(context)),
+                  SizedBox(width: 120),
+                  Expanded(
+                    child: Text('See more', style: TextStyles.text2(context)),
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 8),
             Padding(
               padding: EdgeInsets.only(left: 15, top: 15),
               child: SmallCardScreen(),
             ),
+            SizedBox(height: 16),
             Padding(
               padding: EdgeInsets.only(left: 15, top: 30),
               child: Row(
@@ -64,9 +91,11 @@ class For_You extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Padding(
-              padding: EdgeInsets.only(left: 15, top: 10),
-              child: MidCardScreen(),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 15, top: 10),
+                child: MidCardScreen(),
+              ),
             ),
           ],
         ),

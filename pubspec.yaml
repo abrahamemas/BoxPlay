@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: ">=3.1.5 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -32,16 +32,17 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2 
-  google_fonts:  
-  flutter_svg: 
-  smooth_page_indicator: 
-  dots_indicator: 
-  image_picker:  
-  animations: 
-  animated_glitch: 
-  carousel_slider: 
-  google_nav_bar: 
+  cupertino_icons: ^1.0.2
+  google_fonts:
+  flutter_svg:
+  smooth_page_indicator:
+  dots_indicator:
+  image_picker:
+  animations:
+  animated_glitch:
+  carousel_slider:
+  google_nav_bar:
+  flutter_screenutil: ^5.9.0
   another_flutter_splash_screen: ^1.2.0
   lottie: ^2.7.0
   animated_text_kit: ^4.2.2
@@ -49,16 +50,29 @@ dependencies:
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.2
   hidden_drawer_menu: ^3.0.1
+  flutter_native_splash: ^2.3.7
   intl: ^0.18.1
   dio: ^5.3.4
-  cached_network_image: ^3.3.0
- 
-  
 
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+
+flutter_native_splash:
+  color: "#000000"
+  image: "assets/music_app.png"
+  android: true
+  ios: true
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/music_app.png"
+  adaptive_icon_background: "#191919"
+
+  min_sdk_android: 21
 
   flutter_lints: ^2.0.0
   riverpod_generator: ^2.3.8
@@ -70,5 +84,3 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-
-       

@@ -10,7 +10,7 @@ class Model2 {
   factory Model2.fromJson(Map<String, dynamic> json) {
     return Model2(
       id: json['id'],
-      picture: json['cover'],
+      picture: json['cover_medium'],
       
       
     );

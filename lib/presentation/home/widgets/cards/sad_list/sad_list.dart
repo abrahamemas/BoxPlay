@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:music_app/presentation/home/widgets/buttons/popupmenu_2.dart';
-import 'package:music_app/presentation/home/widgets/cards/sad_list/card_1.dart';
-import 'package:music_app/presentation/home/widgets/cards/sad_list/grid.dart';
+import 'package:music_app/presentation/home/widgets/cards/sad_list/Listcard.dart';
 
+import 'package:music_app/presentation/home/widgets/cards/sad_list/card_1.dart';
 
 class SadListScreen extends StatelessWidget {
   const SadListScreen({super.key});
@@ -16,8 +16,8 @@ class SadListScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: 3,
           itemBuilder: (BuildContext context, int index) {
-            final startIndex = index * 4; 
-          
+            final startIndex = index * 4;
+
             return Container(
               width: 350,
               child: Stack(
@@ -26,9 +26,8 @@ class SadListScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: SadSmallCard(startIndex: startIndex),
                   ),
-                   
                   Transform.translate(
-                    offset: Offset(4, -26),
+                    offset: Offset(40, -26),
                     child: Popup2(),
                   ),
                 ],
@@ -38,28 +37,13 @@ class SadListScreen extends StatelessWidget {
           separatorBuilder: (context, _) => const SizedBox(width: 20),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 350),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-           
-              child:  SizedBox(
-                height: 400,
-                width: 800,
-                child: Padding(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: GridCard2(),
-                    ),
-              ),
-                
-            
+          padding: const EdgeInsets.only(top: 450),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: ListCard2(),
           ),
-        )
+        ),
       ],
-      
-
-
-
     );
   }
 }
-
