@@ -28,7 +28,7 @@ class SongScreen extends ConsumerWidget {
               child: Row(
                 children: [
                   Transform.translate(
-                    offset: Offset(-10, 5),
+                    offset: Offset(-10, 4),
                     child: Container(
                       height: 50,
                       child: IconButton(
