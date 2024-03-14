@@ -11,7 +11,7 @@ class ApiService {
   ApiService();
   Future<List<ArtistsModel>> getArtists() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=Doja Cat');
+      Response response = await _dio.get('$endpoint/search?q= top pop');
       if (response.statusCode == 200) {
         List<ArtistsModel>? artistsList = [];
 
@@ -45,7 +45,7 @@ class ApiService {
 
   Future<List<ArtistsModelTitle>> getArtistsTitle() async {
     try {
-      Response response = await _dio.get('$endpoint/search?q=Doja Cat');
+      Response response = await _dio.get('$endpoint/search?q= top pop');
       if (response.statusCode == 200) {
         List<ArtistsModelTitle> artistsList = [];
 
@@ -78,16 +78,16 @@ class ApiService {
   }
 }
 
-final artistsProvider6 = Provider<ApiService>((ref) => ApiService());
+final searchProvider = Provider<ApiService>((ref) => ApiService());
 
-final artistsDataProvider2 = FutureProvider<List<ArtistsModel>>((ref) async {
-  final apiServices = ref.read(artistsProvider6);
+final searchDataProvider = FutureProvider<List<ArtistsModel>>((ref) async {
+  final apiServices = ref.read(searchProvider);
   return apiServices.getArtists();
 });
-final artistsProvider5 = Provider<ApiService>((ref) => ApiService());
+final searchProvider2 = Provider<ApiService>((ref) => ApiService());
 
-final artistsTitleDataProvider3 =
+final searchTitleDataProvider =
     FutureProvider<List<ArtistsModelTitle>>((ref) async {
-  final apiService = ref.read(artistsProvider5);
+  final apiService = ref.read(searchProvider2);
   return apiService.getArtistsTitle();
 });

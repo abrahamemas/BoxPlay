@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music_app/presentation/home/screens/song_screen/song_screen.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/models.dart';
 import 'package:music_app/service/artists_api/relax_screen_api/card_3_api/smallcardapi/api.dart';
 
@@ -12,17 +14,29 @@ class RelaxSmallCard3 extends ConsumerWidget {
     final data = ref.watch(fetchTracksDataProvider5);
     final data2 = ref.watch(fetchTracksDataProvider5);
 
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        child: data.when(
-          data: (data) {
-            List<PlaylistType> artistscoverList = data.map((e) => e).toList();
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(4, (index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+    return Container(
+      child: data.when(
+        data: (data) {
+          List<PlaylistType> artistscoverList = data.map((e) => e).toList();
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(4, (index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    final selectedTrack = artistscoverList[index].tracks.data;
+                    ref
+                        .read(selectedTrackProvider.notifier)
+                        .setSelectedTrack(selectedTrack, artistscoverList);
+                    ref
+                        .read(playPauseProvider.notifier)
+                        .togglePlayPause(selectedTrack.preview);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SongScreen()),
+                    );
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -77,19 +91,19 @@ class RelaxSmallCard3 extends ConsumerWidget {
                       ),
                     ],
                   ),
-                );
-              }),
-            );
-          },
-          error: (err, s) => Text(
-            err.toString(),
-            style: TextStyle(color: Colors.red),
-          ),
-          loading: () => const Text(
-            'Loading',
-            style: TextStyle(
-              color: Colors.transparent,
-            ),
+                ),
+              );
+            }),
+          );
+        },
+        error: (err, s) => Text(
+          err.toString(),
+          style: TextStyle(color: Colors.red),
+        ),
+        loading: () => const Text(
+          'Loading',
+          style: TextStyle(
+            color: Colors.transparent,
           ),
         ),
       ),

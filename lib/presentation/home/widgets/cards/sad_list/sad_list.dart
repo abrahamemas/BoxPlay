@@ -17,7 +17,6 @@ class SadListScreen extends StatelessWidget {
           itemCount: 3,
           itemBuilder: (BuildContext context, int index) {
             final startIndex = index * 4;
-
             return Container(
               width: 350,
               child: Stack(

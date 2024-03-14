@@ -13,86 +13,83 @@ class RelaxMidCard extends ConsumerWidget {
     final data = ref.watch(artistsDataProvider2);
     final data2 = ref.watch(artistsTitleDataProvider3);
 
-    return GestureDetector(
-      onTap: () {},
-      child: Stack(
-        children: [
-          data.when(
-            data: (data) {
-              List<ArtistsModel> artistscoverList = data.map((e) => e).toList();
-              return SizedBox(
-                  height: 106,
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 106,
-                        width: 106,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Theme.of(context).hoverColor,
-                          image: DecorationImage(
-                            image: NetworkImage(artistscoverList[0].picture),
-                            fit: BoxFit.cover,
-                          ),
+    return Stack(
+      children: [
+        data.when(
+          data: (data) {
+            List<ArtistsModel> artistscoverList = data.map((e) => e).toList();
+            return SizedBox(
+                height: 106,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 106,
+                      width: 106,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Theme.of(context).hoverColor,
+                        image: DecorationImage(
+                          image: NetworkImage(artistscoverList[0].picture),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      data2.when(
-                        data: (artistsTitleList2) {
-                          return Padding(
-                            padding: EdgeInsets.only(left: 120, top: 20),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text(
-                                          artistsTitleList2[0].title,
-                                          style: TextStyles.medium2(context),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
+                    ),
+                    data2.when(
+                      data: (artistsTitleList2) {
+                        return Padding(
+                          padding: EdgeInsets.only(left: 120, top: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 200,
+                                      child: Text(
+                                        artistsTitleList2[0].title,
+                                        style: TextStyles.medium2(context),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 26),
-                                        child: Text(
-                                          '40 songs',
-                                          style: TextStyles.text3(context),
-                                        ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 26),
+                                      child: Text(
+                                        '40 songs',
+                                        style: TextStyles.text3(context),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                        error: (err, s) => Text(err.toString()),
-                        loading: () => const Text(
-                          'Loading',
-                          style: TextStyle(
-                            color: Colors.transparent,
+                              ),
+                            ],
                           ),
+                        );
+                      },
+                      error: (err, s) => Text(err.toString()),
+                      loading: () => const Text(
+                        'Loading',
+                        style: TextStyle(
+                          color: Colors.transparent,
                         ),
                       ),
-                    ],
-                  ));
-            },
-            error: (err, s) => Text(
-              err.toString(),
-              style: TextStyle(color: Colors.red),
-            ),
-            loading: () => const Text(
-              'Loading',
-              style: TextStyle(
-                color: Colors.transparent,
-              ),
+                    ),
+                  ],
+                ));
+          },
+          error: (err, s) => Text(
+            err.toString(),
+            style: TextStyle(color: Colors.red),
+          ),
+          loading: () => const Text(
+            'Loading',
+            style: TextStyle(
+              color: Colors.transparent,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

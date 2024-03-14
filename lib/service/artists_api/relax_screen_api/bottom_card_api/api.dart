@@ -20,7 +20,6 @@ class ApiService {
       return PlaylistType.fromJson(trackJson);
     }).toList();
 
-    print('fetchTracks completed');
     return tracks;
   }
 }

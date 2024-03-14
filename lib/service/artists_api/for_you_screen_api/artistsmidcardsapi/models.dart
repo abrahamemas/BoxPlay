@@ -157,7 +157,7 @@ class Track {
 }
 
 class PlaylistType {
-  final Track tracks;
+  late final Track tracks;
 
   PlaylistType({
     required this.tracks,

@@ -71,7 +71,10 @@ class For_You extends StatelessWidget {
                   Text('Recently Played', style: TextStyles.bigtext(context)),
                   SizedBox(width: 120),
                   Expanded(
-                    child: Text('See more', style: TextStyles.text2(context)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text('See more', style: TextStyles.text4(context)),
+                    ),
                   ),
                 ],
               ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music_app/presentation/home/screens/song_screen/song_screen.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/models.dart';
 import 'package:music_app/service/artists_api/workout_screen_api/api.dart';
 
@@ -12,25 +14,38 @@ class WorkoutSmallCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final data = ref.watch(fetchTracksDataProvider7);
-    final data2 = ref.watch(fetchTracksDataProvider7);
-    final data3 = ref.watch(fetchTracksDataProvider7);
+    final dataProvider = ref.watch(fetchTracksDataProvider7);
 
-    return GestureDetector(
-      onTap: () {},
+    return SingleChildScrollView(
       child: Container(
-        child: data.when(
+        height: 350,
+        child: dataProvider.when(
           data: (data) {
             List<PlaylistType> artistsList = data.map((e) => e).toList();
+            return ListView.builder(
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                final dataIndex = startIndex + index;
+                final selectedTrack = artistsList[dataIndex].tracks.data;
 
-            return Column(
-              children: List.generate(
-                4,
-                (index) {
-                  final dataIndex = startIndex + index;
-                  return Column(
-                    children: [
-                      Stack(
+                return Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        final selectedTrack =
+                            artistsList[dataIndex].tracks.data;
+                        ref
+                            .read(selectedTrackProvider.notifier)
+                            .setSelectedTrack(selectedTrack, artistsList);
+                        ref
+                            .read(playPauseProvider.notifier)
+                            .togglePlayPause(selectedTrack.preview);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SongScreen()),
+                        );
+                      },
+                      child: Stack(
                         children: [
                           Container(
                             height: 58,
@@ -39,11 +54,8 @@ class WorkoutSmallCard extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(5),
                               color: Theme.of(context).hoverColor,
                               image: DecorationImage(
-                                image: NetworkImage(artistsList[dataIndex]
-                                    .tracks
-                                    .data
-                                    .album
-                                    .cover_medium),
+                                image: NetworkImage(
+                                    selectedTrack.album.cover_medium),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -58,16 +70,7 @@ class WorkoutSmallCard extends ConsumerWidget {
                                 child: Container(
                                   width: 150,
                                   child: Text(
-                                    data2.when(
-                                      data: (artistsList2) {
-                                        return artistsList2[dataIndex]
-                                            .tracks
-                                            .data
-                                            .title_short;
-                                      },
-                                      error: (err, s) => 'Error',
-                                      loading: () => 'Loading',
-                                    ),
+                                    selectedTrack.title_short,
                                     style: TextStyles.smalltext(context),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -85,17 +88,7 @@ class WorkoutSmallCard extends ConsumerWidget {
                                 child: Container(
                                   width: 150,
                                   child: Text(
-                                    data3.when(
-                                      data: (artistsList3) {
-                                        return artistsList3[dataIndex]
-                                            .tracks
-                                            .data
-                                            .artist
-                                            .name;
-                                      },
-                                      error: (err, s) => 'Error',
-                                      loading: () => 'Loading',
-                                    ),
+                                    selectedTrack.artist.name,
                                     style: TextStyles.smalltext2(context),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -106,11 +99,11 @@ class WorkoutSmallCard extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
-                    ],
-                  );
-                },
-              ),
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                );
+              },
             );
           },
           error: (err, s) => Text(err.toString()),

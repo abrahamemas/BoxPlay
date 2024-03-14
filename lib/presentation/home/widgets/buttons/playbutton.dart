@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
 
-class PlayButton extends StatelessWidget {
+class PlayButton extends ConsumerStatefulWidget {
   final double height;
   final double size;
 
@@ -8,25 +10,55 @@ class PlayButton extends StatelessWidget {
       : super(key: key);
 
   @override
+  _PlayButton2State createState() => _PlayButton2State();
+}
+
+class _PlayButton2State extends ConsumerState<PlayButton> {
+  late bool isPlaying;
+
+  @override
+  void initState() {
+    super.initState();
+    isPlaying = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final selectedTrack = ref.watch(selectedTrackProvider);
+
     return Padding(
       padding: const EdgeInsets.only(
         top: 42,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: height,
+            height: widget.height,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Theme.of(context).primaryColor,
             ),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.play_arrow_sharp,
-                size: size,
+            child: Transform.translate(
+              offset: Offset(0, 0),
+              child: IconButton(
+                onPressed: () async {
+                  if (selectedTrack != null) {
+                    final playPauseNotifier =
+                        ref.read(playPauseProvider.notifier);
+                    await playPauseNotifier
+                        .togglePlayPause(selectedTrack.preview);
+                  }
+
+                  setState(() {
+                    isPlaying = selectedTrack != null ? !isPlaying : isPlaying;
+                  });
+                },
+                icon: Icon(
+                  isPlaying ? Icons.pause : Icons.play_arrow_sharp,
+                  size: widget.size,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),

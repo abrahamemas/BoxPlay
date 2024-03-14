@@ -78,7 +78,7 @@ class RelaxCard extends StatelessWidget {
                     ],
                   ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 140),
+                  padding: const EdgeInsets.only(top: 134),
                   child: Popup(),
                 ),
                 Positioned(
@@ -120,7 +120,7 @@ class RelaxCard extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
+                          backgroundColor: Theme.of(context).primaryColor,
                           padding: EdgeInsets.symmetric(
                             horizontal: 10,
                           ),

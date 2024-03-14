@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music_app/presentation/home/screens/song_screen/song_screen.dart';
 import 'package:music_app/presentation/home/widgets/buttons/playbutton2.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistscard_api/api.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/models.dart';
 
 class SmallCardScreen extends ConsumerWidget {
@@ -13,20 +15,32 @@ class SmallCardScreen extends ConsumerWidget {
     final data = ref.watch(fetchTracksDataProvider2);
     final data2 = ref.watch(fetchTracksDataProvider2);
 
-    return GestureDetector(
-      onTap: () {},
-      child: SizedBox(
-        height: 120,
-        child: data.when(
-          data: (data) {
-            List<PlaylistType> artistsList = data.map((e) => e).toList();
+    return SizedBox(
+      height: 120,
+      child: data.when(
+        data: (data) {
+          List<PlaylistType> artistsList = data.map((e) => e).toList();
 
-            return ListView.separated(
-              padding: const EdgeInsets.only(right: 30),
-              scrollDirection: Axis.horizontal,
-              itemCount: 13,
-              itemBuilder: (BuildContext context, index) {
-                return Stack(
+          return ListView.separated(
+            padding: const EdgeInsets.only(right: 30),
+            scrollDirection: Axis.horizontal,
+            itemCount: 13,
+            itemBuilder: (BuildContext context, index) {
+              return GestureDetector(
+                onTap: () {
+                  final selectedTrack = artistsList[index].tracks.data;
+                  ref
+                      .read(selectedTrackProvider.notifier)
+                      .setSelectedTrack(selectedTrack, artistsList);
+                  ref
+                      .read(playPauseProvider.notifier)
+                      .togglePlayPause(selectedTrack.preview);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SongScreen()),
+                  );
+                },
+                child: Stack(
                   children: [
                     Container(
                       height: 90,
@@ -55,14 +69,13 @@ class SmallCardScreen extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Container(
-                                  child: Text(
-                                    artistsList2[index].tracks.data.title_short,
-                                    style: TextStyles.smalltext(context),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                              Container(
+                                width: 100,
+                                child: Text(
+                                  artistsList2[index].tracks.data.title_short,
+                                  style: TextStyles.smalltext(context),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
@@ -76,16 +89,16 @@ class SmallCardScreen extends ConsumerWidget {
                       ),
                     ),
                   ],
-                );
-              },
-              separatorBuilder: (context, _) => const SizedBox(width: 20),
-            );
-          },
-          error: (err, s) => Text(err.toString()),
-          loading: () => const Text(
-            'Loading',
-            style: TextStyle(color: Colors.transparent),
-          ),
+                ),
+              );
+            },
+            separatorBuilder: (context, _) => const SizedBox(width: 20),
+          );
+        },
+        error: (err, s) => Text(err.toString()),
+        loading: () => const Text(
+          'Loading',
+          style: TextStyle(color: Colors.transparent),
         ),
       ),
     );

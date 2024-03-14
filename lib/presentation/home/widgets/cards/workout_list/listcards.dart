@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music_app/presentation/home/screens/song_screen/song_screen.dart';
 import 'package:music_app/presentation/home/widgets/buttons/playbutton2.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
+import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/models.dart';
 import 'package:music_app/service/artists_api/workout_screen_api/bottom_grid_api/api.dart';
 
@@ -13,19 +15,31 @@ class ListCard extends ConsumerWidget {
     final data = ref.watch(fetchTracksDataProvider8);
     final data2 = ref.watch(fetchTracksDataProvider8);
 
-    return GestureDetector(
-      onTap: () {},
-      child: SizedBox(
-        height: 160,
-        child: data.when(
-          data: (data) {
-            List<PlaylistType> artistscoverList = data.map((e) => e).toList();
-            return ListView.separated(
-              padding: const EdgeInsets.only(right: 40),
-              scrollDirection: Axis.horizontal,
-              itemCount: 13,
-              itemBuilder: (BuildContext context, index) {
-                return Stack(
+    return SizedBox(
+      height: 160,
+      child: data.when(
+        data: (data) {
+          List<PlaylistType> artistscoverList = data.map((e) => e).toList();
+          return ListView.separated(
+            padding: const EdgeInsets.only(right: 40),
+            scrollDirection: Axis.horizontal,
+            itemCount: 13,
+            itemBuilder: (BuildContext context, index) {
+              return GestureDetector(
+                onTap: () {
+                  final selectedTrack = artistscoverList[index].tracks.data;
+                  ref
+                      .read(selectedTrackProvider.notifier)
+                      .setSelectedTrack(selectedTrack, artistscoverList);
+                  ref
+                      .read(playPauseProvider.notifier)
+                      .togglePlayPause(selectedTrack.preview);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SongScreen()),
+                  );
+                },
+                child: Stack(
                   children: [
                     Container(
                       height: 120,
@@ -81,19 +95,19 @@ class ListCard extends ConsumerWidget {
                       ),
                     ),
                   ],
-                );
-              },
-              separatorBuilder: (context, _) => const SizedBox(width: 20),
-            );
-          },
-          error: (err, s) => Text(
-            err.toString(),
-            style: TextStyle(color: Colors.red),
-          ),
-          loading: () => const Text(
-            'Loading',
-            style: TextStyle(color: Colors.transparent),
-          ),
+                ),
+              );
+            },
+            separatorBuilder: (context, _) => const SizedBox(width: 20),
+          );
+        },
+        error: (err, s) => Text(
+          err.toString(),
+          style: TextStyle(color: Colors.red),
+        ),
+        loading: () => const Text(
+          'Loading',
+          style: TextStyle(color: Colors.transparent),
         ),
       ),
     );
