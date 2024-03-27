@@ -13,8 +13,6 @@ class MidCardScreen extends ConsumerWidget {
     final data = ref.watch(fetchTracksDataProvider);
     final data2 = ref.watch(fetchTracksDataProvider);
 
-    print(data);
-
     return SizedBox(
       height: 120,
       child: data.when(
@@ -23,7 +21,7 @@ class MidCardScreen extends ConsumerWidget {
           return ListView.separated(
             padding: const EdgeInsets.only(right: 30),
             scrollDirection: Axis.horizontal,
-            itemCount: 13,
+            itemCount: 50,
             itemBuilder: (BuildContext context, index) {
               return GestureDetector(
                 onTap: () {

@@ -24,6 +24,11 @@ class TextStyles {
         fontWeight: FontWeight.w500,
         color: Theme.of(context).hintColor,
       );
+  static TextStyle text5(BuildContext context) => GoogleFonts.interTight(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+      );
 
   static TextStyle smalltext(BuildContext context) => GoogleFonts.interTight(
         fontSize: 12,
@@ -33,6 +38,16 @@ class TextStyles {
   static TextStyle smalltext2(BuildContext context) => GoogleFonts.interTight(
         fontSize: 12,
         fontWeight: FontWeight.w500,
+        color: Theme.of(context).hintColor,
+      );
+  static TextStyle smalltext4(BuildContext context) => GoogleFonts.interTight(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).hintColor,
+      );
+  static TextStyle smalltext5(BuildContext context) => GoogleFonts.interTight(
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
         color: Theme.of(context).hintColor,
       );
 

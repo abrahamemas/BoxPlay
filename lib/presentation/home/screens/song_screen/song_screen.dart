@@ -2,6 +2,7 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_app/presentation/home/screens/home_screen/home_screen.dart';
+import 'package:music_app/presentation/home/screens/song_screen/queue.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
 
@@ -268,8 +269,9 @@ class SongScreen extends ConsumerWidget {
                           offset: Offset(0, -58),
                           child: SliderTheme(
                             data: SliderThemeData(
+                              trackHeight: 2,
                               thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 5),
+                                  RoundSliderThumbShape(enabledThumbRadius: 4),
                             ),
                             child: Container(
                               width: 390,
@@ -357,16 +359,34 @@ class SongScreen extends ConsumerWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 24),
-                              child: Text(
-                                "Up Next",
-                                style: TextStyles.bigtext2(context),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => QueueScreen()),
+                                  );
+                                },
+                                child: Text(
+                                  "Up Next",
+                                  style: TextStyles.bigtext2(context),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 170),
-                              child: Text(
-                                "Queue",
-                                style: TextStyles.bigtext(context),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => QueueScreen()),
+                                  );
+                                },
+                                child: Text(
+                                  "Queue",
+                                  style: TextStyles.bigtext(context),
+                                ),
                               ),
                             ),
                             IconButton(

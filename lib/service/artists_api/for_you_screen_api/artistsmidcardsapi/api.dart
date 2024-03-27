@@ -35,7 +35,7 @@ final fetchTracksDataProvider = FutureProvider<List<PlaylistType>>((ref) async {
 class SelectedTrackNotifier extends StateNotifier<PlayListItemType?> {
   double _duration = 1;
   int _currentIndex = 0;
-  List<PlaylistType>? _tracks; // Store tracks list
+  List<PlaylistType>? _tracks;
   final AudioPlayer _audioPlayer;
 
   double get duration => _duration;
@@ -59,6 +59,8 @@ class SelectedTrackNotifier extends StateNotifier<PlayListItemType?> {
       final selectedTrack = _tracks![_currentIndex].tracks.data;
       setSelectedTrack(selectedTrack, _tracks!);
       await _playTrack(selectedTrack.preview);
+    } else {
+      await stop();
     }
   }
 
@@ -74,6 +76,19 @@ class SelectedTrackNotifier extends StateNotifier<PlayListItemType?> {
   Future<void> _playTrack(String audioUrl) async {
     await _audioPlayer.stop();
     await _audioPlayer.play(UrlSource(audioUrl));
+    _audioPlayer.onPlayerComplete.listen((_) {
+      moveToNextTrack();
+    });
+  }
+
+  List<PlayListItemType> getUpcomingSongs() {
+    if (_tracks == null || _currentIndex >= _tracks!.length - 1) {
+      return [];
+    }
+    return _tracks!
+        .sublist(_currentIndex + 1)
+        .map((playlistType) => playlistType.tracks.data)
+        .toList();
   }
 
   Future<void> stop() async {

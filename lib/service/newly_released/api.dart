@@ -9,7 +9,7 @@ class ApiService {
 
   Future<List<PlaylistType>> fetchTracks() async {
     const url =
-        'https://corsproxy.io/?https://api.deezer.com/playlist/8625952102';
+        'https://corsproxy.io/?https://api.deezer.com/playlist/2098157264';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
@@ -24,10 +24,9 @@ class ApiService {
   }
 }
 
-final searchTracksProvider = Provider<ApiService>((ref) => ApiService());
+final newlyTracksProvider = Provider<ApiService>((ref) => ApiService());
 
-final searchTracksDataProvider =
-    FutureProvider<List<PlaylistType>>((ref) async {
-  final apiService = ref.read(searchTracksProvider);
+final newlyTracksDataProvider = FutureProvider<List<PlaylistType>>((ref) async {
+  final apiService = ref.read(newlyTracksProvider);
   return apiService.fetchTracks();
 });

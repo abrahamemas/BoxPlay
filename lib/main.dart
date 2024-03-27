@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'presentation/home/screens/splash_screen/splash_screen.dart';
+import 'package:music_app/presentation/home/screens/splash_screen/splash_screen.dart';
 
 void main() {
   runApp(ProviderScope(child: MusicApp()));

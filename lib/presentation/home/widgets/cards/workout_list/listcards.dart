@@ -23,7 +23,7 @@ class ListCard extends ConsumerWidget {
           return ListView.separated(
             padding: const EdgeInsets.only(right: 40),
             scrollDirection: Axis.horizontal,
-            itemCount: 13,
+            itemCount: 40,
             itemBuilder: (BuildContext context, index) {
               return GestureDetector(
                 onTap: () {

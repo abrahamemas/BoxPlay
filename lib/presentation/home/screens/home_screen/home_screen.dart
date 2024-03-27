@@ -165,10 +165,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             ),
           ),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: ButtomNavBar(),
-          ),
+          bottomNavigationBar: ButtomNavBar(),
         ),
       ),
     );

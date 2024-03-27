@@ -24,7 +24,7 @@ class SmallCardScreen extends ConsumerWidget {
           return ListView.separated(
             padding: const EdgeInsets.only(right: 30),
             scrollDirection: Axis.horizontal,
-            itemCount: 13,
+            itemCount: 50,
             itemBuilder: (BuildContext context, index) {
               return GestureDetector(
                 onTap: () {
@@ -70,7 +70,7 @@ class SmallCardScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                width: 100,
+                                width: 80,
                                 child: Text(
                                   artistsList2[index].tracks.data.title_short,
                                   style: TextStyles.smalltext(context),

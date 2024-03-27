@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
-
 import 'package:music_app/service/artists_api/relax_screen_api/card_1_api/midcardsapi/api.dart';
 import 'package:music_app/service/artists_api/relax_screen_api/card_1_api/midcardsapi/artists_model.dart';
 

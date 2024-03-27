@@ -47,7 +47,7 @@ class MiniPlayer extends ConsumerWidget {
                         child: Stack(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 5),
+                              padding: const EdgeInsets.only(left: 20, top: 10),
                               child: Container(
                                 height: 48,
                                 width: 48,
@@ -68,7 +68,7 @@ class MiniPlayer extends ConsumerWidget {
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(left: 78, top: 5),
+                                      const EdgeInsets.only(left: 78, top: 10),
                                   child: Container(
                                     width: 150,
                                     child: Text(
@@ -86,7 +86,7 @@ class MiniPlayer extends ConsumerWidget {
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(left: 78, top: 20),
+                                      const EdgeInsets.only(left: 78, top: 30),
                                   child: Container(
                                     width: 150,
                                     child: Text(
@@ -128,6 +128,7 @@ class MiniPlayer extends ConsumerWidget {
                                     padding: const EdgeInsets.only(top: 67),
                                     child: SliderTheme(
                                       data: SliderThemeData(
+                                        trackHeight: 2,
                                         thumbShape: RoundSliderThumbShape(
                                             enabledThumbRadius: 0),
                                       ),
@@ -138,7 +139,7 @@ class MiniPlayer extends ConsumerWidget {
                                         activeColor:
                                             Theme.of(context).primaryColor,
                                         inactiveColor:
-                                            Theme.of(context).hoverColor,
+                                            Theme.of(context).hintColor,
                                         onChanged: (value) {
                                           audioPlayer.seek(
                                               Duration(seconds: value.toInt()));
