@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:music_app/presentation/home/screens/tabs/energize.dart';
 import 'package:music_app/presentation/home/screens/tabs/for_you.dart';
@@ -24,6 +26,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _updateGreeting();
+  }
+
+  File? image;
+
+  Future<void> pickImage() async {
+    try {
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (pickedImage == null) {
+        print('No image picked');
+        return;
+      }
+
+      final imageTemporary = File(pickedImage.path);
+      setState(() {
+        image = imageTemporary;
+      });
+    } catch (e) {
+      print('Failed to pick image: $e');
+    }
   }
 
   void _updateGreeting() {
@@ -51,12 +74,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             elevation: 0.0,
             centerTitle: true,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            title: Stack(
+            flexibleSpace: Stack(
               children: [
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 0, top: 5),
+                      padding: const EdgeInsets.only(left: 15, top: 5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -75,25 +98,44 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 100, top: 18),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.notifications,
-                          size: 28,
-                          color: Color.fromARGB(70, 255, 255, 255),
-                        ),
+                      padding: EdgeInsets.only(
+                        left: 100,
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 20, top: 18),
+                      child: Transform.translate(
+                        offset: Offset(20, -20),
                         child: IconButton(
                           onPressed: () {},
                           icon: const Icon(
-                            Icons.account_circle_outlined,
-                            size: 26,
+                            Icons.notifications_none_outlined,
+                            size: 28,
                             color: Color.fromARGB(70, 255, 255, 255),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                      ),
+                      child: Transform.translate(
+                        offset: Offset(30, -20),
+                        child: GestureDetector(
+                          onTap: pickImage,
+                          child: Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: ClipOval(
+                              child: image != null
+                                  ? Image.file(
+                                      image!,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset('assets/image15.jpg',
+                                      fit: BoxFit.cover),
+                            ),
                           ),
                         ),
                       ),

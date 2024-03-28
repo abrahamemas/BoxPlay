@@ -32,11 +32,12 @@ class SearchResultsList extends ConsumerWidget {
                 onTap: () {
                   final selectedTrack = artistscoverList[index].tracks.data;
                   ref
-                      .read(selectedTrackProvider.notifier)
-                      .setSelectedTrack(selectedTrack, artistscoverList);
-                  ref
                       .read(playPauseProvider.notifier)
                       .togglePlayPause(selectedTrack.preview);
+                  ref
+                      .read(selectedTrackProvider.notifier)
+                      .setSelectedTrack(selectedTrack, artistscoverList);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SongScreen()),

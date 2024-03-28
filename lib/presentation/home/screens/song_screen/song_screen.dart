@@ -1,10 +1,10 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:music_app/presentation/home/screens/home_screen/home_screen.dart';
 import 'package:music_app/presentation/home/screens/song_screen/queue.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SongScreen extends ConsumerWidget {
   const SongScreen({Key? key}) : super(key: key);
@@ -40,11 +40,7 @@ class SongScreen extends ConsumerWidget {
                           child: Icon(Icons.arrow_back_ios),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()),
-                          );
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),
@@ -399,8 +395,8 @@ class SongScreen extends ConsumerWidget {
                     );
                   } else {
                     return Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
+                      child: SpinKitCircle(
+                        color: Theme.of(context).hintColor,
                       ),
                     );
                   }

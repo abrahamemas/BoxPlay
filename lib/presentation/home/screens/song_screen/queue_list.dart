@@ -20,14 +20,15 @@ class QueueListScreen extends ConsumerWidget {
           return GestureDetector(
             onTap: () async {
               final selectedTrack = upcomingSongs[index];
+              ref
+                  .read(playPauseProvider.notifier)
+                  .togglePlayPause(selectedTrack.preview);
               ref.read(selectedTrackProvider.notifier).setSelectedTrack(
                   selectedTrack,
                   upcomingSongs
                       .map((item) => PlaylistType(tracks: Track(data: item)))
                       .toList());
-              ref
-                  .read(playPauseProvider.notifier)
-                  .togglePlayPause(selectedTrack.preview);
+
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SongScreen()),

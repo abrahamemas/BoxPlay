@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/presentation/home/widgets/buttons/like_icon_button.dart';
+import 'package:music_app/presentation/home/screens/song_screen/song_screen.dart';
 import 'package:music_app/presentation/home/widgets/buttons/playbutton.dart';
 import 'package:music_app/presentation/home/widgets/buttons/popupmenu.dart';
 import 'package:music_app/presentation/home/widgets/cards/relax_card/card_1/midcards.dart';
@@ -86,8 +86,7 @@ class RelaxCard extends StatelessWidget {
                   top: 80,
                   child: Center(
                     child: PopupMenuButton<String>(
-                      iconColor: Theme.of(context).primaryColor,
-                      color: Colors.white,
+                      iconColor: Theme.of(context).hintColor,
                       onSelected: (value) {
                         print('Selected: $value');
                       },
@@ -102,7 +101,31 @@ class RelaxCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(right: 128, top: 90, child: LikeHeartIcon()),
+                Positioned(
+                  right: 128,
+                  top: 90,
+                  child: Transform.translate(
+                    offset: Offset(10, -17),
+                    child: Container(
+                      height: 50,
+                      child: IconButton(
+                        iconSize: 26,
+                        color: Theme.of(context).hintColor,
+                        icon: Transform.rotate(
+                          angle: -3.14 / 2,
+                          child: Icon(Icons.arrow_back_ios),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SongScreen()),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
                 Positioned(
                   right: 10,
                   top: 30,

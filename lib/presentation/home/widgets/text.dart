@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextStyles {
+  static TextStyle minitext(BuildContext context) => GoogleFonts.interTight(
+        fontSize: 10,
+        fontWeight: FontWeight.w700,
+        color: Theme.of(context).primaryColor,
+      );
+
   static TextStyle text(BuildContext context) => GoogleFonts.interTight(
         fontSize: 16,
         fontWeight: FontWeight.w300,

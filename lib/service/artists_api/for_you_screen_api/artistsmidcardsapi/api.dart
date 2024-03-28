@@ -37,10 +37,24 @@ class SelectedTrackNotifier extends StateNotifier<PlayListItemType?> {
   int _currentIndex = 0;
   List<PlaylistType>? _tracks;
   final AudioPlayer _audioPlayer;
+  late StreamSubscription<PlayerState> _playerStateSubscription;
 
   double get duration => _duration;
 
-  SelectedTrackNotifier(this._audioPlayer) : super(null);
+  SelectedTrackNotifier(this._audioPlayer) : super(null) {
+    _playerStateSubscription =
+        _audioPlayer.onPlayerStateChanged.listen((state) {
+      if (state == PlayerState.completed) {
+        moveToNextTrack();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _playerStateSubscription.cancel();
+    super.dispose();
+  }
 
   void setDuration(double duration) {
     _duration = duration;
@@ -75,10 +89,9 @@ class SelectedTrackNotifier extends StateNotifier<PlayListItemType?> {
 
   Future<void> _playTrack(String audioUrl) async {
     await _audioPlayer.stop();
-    await _audioPlayer.play(UrlSource(audioUrl));
-    _audioPlayer.onPlayerComplete.listen((_) {
-      moveToNextTrack();
-    });
+    await _audioPlayer.play(
+      UrlSource(audioUrl),
+    );
   }
 
   List<PlayListItemType> getUpcomingSongs() {
@@ -109,39 +122,23 @@ final audioPlayerProvider = Provider<AudioPlayer>((ref) {
 final playPauseProvider = StateNotifierProvider<PlayPauseNotifier, bool>((ref) {
   return PlayPauseNotifier(
     ref.read(audioPlayerProvider),
-    (double duration) {
-      ref.read(selectedTrackProvider.notifier).setDuration(duration);
-    },
   );
 });
 
 class PlayPauseNotifier extends StateNotifier<bool> {
   final AudioPlayer _audioPlayer;
-  final void Function(double) updateDuration;
-
-  late StreamSubscription<Duration> _durationSubscription;
 
   PlayPauseNotifier(
     this._audioPlayer,
-    this.updateDuration,
-  ) : super(false) {
-    _durationSubscription =
-        _audioPlayer.onDurationChanged.listen((Duration duration) {
-      updateDuration(duration.inSeconds.toDouble());
-    });
-  }
-
-  @override
-  void dispose() {
-    _durationSubscription.cancel();
-    super.dispose();
-  }
+  ) : super(false);
 
   Future<void> togglePlayPause(String audioUrl) async {
     if (state) {
       await _audioPlayer.pause();
     } else {
-      await _audioPlayer.play(UrlSource(audioUrl));
+      await _audioPlayer.play(
+        UrlSource(audioUrl),
+      );
     }
     state = !state;
   }

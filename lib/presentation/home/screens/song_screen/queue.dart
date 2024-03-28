@@ -2,7 +2,6 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_app/presentation/home/screens/song_screen/queue_list.dart';
-import 'package:music_app/presentation/home/screens/song_screen/song_screen.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
 import 'package:music_app/service/artists_api/for_you_screen_api/artistsmidcardsapi/api.dart';
 
@@ -25,12 +24,10 @@ class QueueScreen extends ConsumerWidget {
               child: BlurryContainer(
                 blur: 5,
                 color: Colors.transparent,
-                height: 80,
                 elevation: 0,
-                padding: const EdgeInsets.all(8),
                 child: Stack(children: [
                   Transform.translate(
-                    offset: Offset(5, 4),
+                    offset: Offset(5, 13),
                     child: Container(
                       height: 50,
                       child: IconButton(
@@ -41,11 +38,7 @@ class QueueScreen extends ConsumerWidget {
                           child: Icon(Icons.arrow_back_ios),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SongScreen()),
-                          );
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),
@@ -54,7 +47,7 @@ class QueueScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 78, top: 15),
+                        padding: const EdgeInsets.only(left: 78, top: 26),
                         child: Text(
                           'Now Playing:',
                           style: TextStyles.smalltext5(context),
