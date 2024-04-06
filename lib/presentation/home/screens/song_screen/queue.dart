@@ -1,5 +1,7 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music_app/presentation/home/screens/song_screen/queue_list.dart';
 import 'package:music_app/presentation/home/widgets/text.dart';
@@ -46,52 +48,57 @@ class QueueScreen extends ConsumerWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 78, top: 26),
-                        child: Text(
-                          'Now Playing:',
-                          style: TextStyles.smalltext5(context),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 78, top: 33),
+                          child: Text(
+                            'Now Playing:',
+                            style: TextStyles.smalltext5(context),
+                          ),
                         ),
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 78),
-                            child: Container(
-                              width: 70,
-                              child: Text(
-                                selectedTrack.title_short,
-                                style: TextStyles.text4(context),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                      Transform.translate(
+                        offset: Offset(0, -10),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 78),
+                              child: Container(
+                                width: 70,
+                                child: Text(
+                                  selectedTrack.title_short,
+                                  style: TextStyles.text4(context),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 2,
-                            ),
-                            child: Text(
-                              '-',
-                              style: TextStyles.text4(context),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                            ),
-                            child: Container(
-                              width: 150,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 2,
+                              ),
                               child: Text(
-                                selectedTrack.artist.name,
+                                '-',
                                 style: TextStyles.text4(context),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                              ),
+                              child: Container(
+                                width: 70,
+                                child: Text(
+                                  selectedTrack.artist.name,
+                                  style: TextStyles.text4(context),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),

@@ -9,9 +9,10 @@ class RelaxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 20, top: 15),
+          padding: EdgeInsets.only(left: 15, top: 15),
           child: Text(
             'Today’s Refreshing Song-Recommendations',
             style: TextStyles.bigtext(context),
@@ -22,7 +23,7 @@ class RelaxScreen extends StatelessWidget {
           child: RelaxCard(),
         ),
         Padding(
-          padding: EdgeInsets.only(right: 220, top: 15),
+          padding: EdgeInsets.only(left: 20, top: 15),
           child: Text(
             'Mixes for you',
             style: TextStyles.bigtext(context),

@@ -13,40 +13,44 @@ class CardScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      width: 148,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).hoverColor,
-        image: DecorationImage(
-          image: AssetImage(image),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 60,
-                    ),
-                    child: Text(
-                      text,
-                      style: TextStyles.medium2(context),
-                    ),
-                  ),
-                ),
-              ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          height: constraints.maxHeight > 600 ? 80 : 80,
+          width: constraints.maxWidth > 600 ? 148 : 148,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Theme.of(context).hoverColor,
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
             ),
           ),
-        ],
-      ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 60,
+                        ),
+                        child: Text(
+                          text,
+                          style: TextStyles.medium2(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

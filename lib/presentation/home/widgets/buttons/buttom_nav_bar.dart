@@ -28,7 +28,7 @@ class _ButtomNavBarState extends State<ButtomNavBar> {
                 child: NavigationBar(
                   elevation: 0,
                   shadowColor: Theme.of(context).scaffoldBackgroundColor,
-                  indicatorColor: Colors.transparent,
+                  indicatorColor: Theme.of(context).scaffoldBackgroundColor,
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   selectedIndex: index,
                   onDestinationSelected: (index) =>

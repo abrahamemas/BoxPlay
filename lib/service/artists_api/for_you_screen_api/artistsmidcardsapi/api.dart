@@ -89,6 +89,7 @@ class SelectedTrackNotifier extends StateNotifier<PlayListItemType?> {
 
   Future<void> _playTrack(String audioUrl) async {
     await _audioPlayer.stop();
+
     await _audioPlayer.play(
       UrlSource(audioUrl),
     );

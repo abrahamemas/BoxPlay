@@ -54,124 +54,128 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       'assets/R&B.png'
     ];
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        centerTitle: true,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Container(
-                width: 365,
-                child: TextField(
-                  controller: _searchController,
-                  onChanged: (value) {
-                    setState(() {
-                      _searchQuery = value;
-                    });
-                  },
-                  onSubmitted: (value) {
-                    searchService.searchTracks(_searchQuery);
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Theme.of(context).primaryColor,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 3, horizontal: 8),
-                    hintText: 'Search songs, artist, album o...',
-                    hintStyle: GoogleFonts.interTight(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xff000000),
-                    ),
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: Color(0xff000000),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (_searchQuery.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 10, left: 25),
-                child: Container(
-                    height: 270,
-                    child: SearchResultsList(searchQuery: _searchQuery)),
-              ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, left: 25),
-              child: Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          appBar: AppBar(
+            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+            automaticallyImplyLeading: false,
+            elevation: 0.0,
+            centerTitle: true,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            title: SingleChildScrollView(
+              child: Stack(
                 children: [
-                  Icon(
-                    Icons.trending_up_rounded,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Text(
-                    'Trending songs',
-                    style: TextStyles.text4(context),
+                  Container(
+                    width: 365,
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: (value) {
+                        setState(() {
+                          _searchQuery = value;
+                        });
+                      },
+                      onSubmitted: (value) {
+                        searchService.searchTracks(_searchQuery);
+                      },
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Theme.of(context).primaryColor,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+                        hintText: 'Search songs, artist, album o...',
+                        hintStyle: GoogleFonts.interTight(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff000000),
+                        ),
+                        prefixIcon: Icon(Icons.search),
+                        prefixIconColor: Color(0xff000000),
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30, left: 15),
-                child: TrandingArtists(),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 40,
-                left: 15,
-              ),
-              child: Text(
-                'Browse',
-                style: TextStyles.text4(context),
-              ),
-            ),
-            SizedBox(
-              height: 600,
-              child: GridView.builder(
-                itemCount: 10,
-                padding: EdgeInsets.all(18),
-                scrollDirection: Axis.vertical,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  mainAxisExtent: 100,
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (_searchQuery.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 25),
+                    child: Container(
+                        height: 270,
+                        child: SearchResultsList(searchQuery: _searchQuery)),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, left: 25),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.trending_up_rounded,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(
+                        width: 7,
+                      ),
+                      Text(
+                        'Trending songs',
+                        style: TextStyles.text4(context),
+                      ),
+                    ],
+                  ),
                 ),
-                itemBuilder: (BuildContext context, int index) {
-                  return CardScreen2(
-                    text: cardTexts[index],
-                    image: cardImages[index],
-                  );
-                },
-              ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30, left: 15),
+                    child: TrandingArtists(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 40,
+                    left: 15,
+                  ),
+                  child: Text(
+                    'Browse',
+                    style: TextStyles.text4(context),
+                  ),
+                ),
+                SizedBox(
+                  height: 600,
+                  child: GridView.builder(
+                    itemCount: 10,
+                    padding: EdgeInsets.all(18),
+                    scrollDirection: Axis.vertical,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: constraints.maxWidth > 600 ? 2 : 2,
+                      mainAxisSpacing: constraints.maxWidth > 600 ? 20 : 20,
+                      crossAxisSpacing: constraints.maxWidth > 600 ? 20 : 20,
+                      mainAxisExtent: constraints.maxWidth > 600 ? 100 : 100,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return CardScreen2(
+                        text: cardTexts[index],
+                        image: cardImages[index],
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: ButtomNavBar(),
+          ),
+          bottomNavigationBar: ButtomNavBar(),
+        );
+      },
     );
   }
 }

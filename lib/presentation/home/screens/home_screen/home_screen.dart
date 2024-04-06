@@ -65,150 +65,159 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          appBar: AppBar(
-            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-            automaticallyImplyLeading: false,
-            elevation: 0.0,
-            centerTitle: true,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            flexibleSpace: Stack(
-              children: [
-                Row(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              appBar: AppBar(
+                surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+                automaticallyImplyLeading: false,
+                elevation: 0.0,
+                centerTitle: true,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                flexibleSpace: Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Welcome,',
-                            style: TextStyles.text(context),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            _greeting,
-                            style: TextStyles.medium(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 100,
-                      ),
-                      child: Transform.translate(
-                        offset: Offset(20, -20),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.notifications_none_outlined,
-                            size: 28,
-                            color: Color.fromARGB(70, 255, 255, 255),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: constraints.maxWidth > 600 ? 15 : 15,
+                              top: constraints.maxWidth > 600 ? 5 : 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Welcome,',
+                                style: TextStyles.text(context),
+                              ),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Text(
+                                _greeting,
+                                style: TextStyles.medium(context),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: Transform.translate(
-                        offset: Offset(30, -20),
-                        child: GestureDetector(
-                          onTap: pickImage,
-                          child: Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: ClipOval(
-                              child: image != null
-                                  ? Image.file(
-                                      image!,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset('assets/image15.jpg',
-                                      fit: BoxFit.cover),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: constraints.maxWidth > 600 ? 480 : 160,
+                          ),
+                          child: Transform.translate(
+                            offset: Offset(20, -20),
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.notifications_none_outlined,
+                                size: 28,
+                                color: Color.fromARGB(70, 255, 255, 255),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 10,
+                          ),
+                          child: Transform.translate(
+                            offset: Offset(35, -20),
+                            child: GestureDetector(
+                              onTap: pickImage,
+                              child: Container(
+                                width: 48,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: ClipOval(
+                                  child: image != null
+                                      ? Image.file(
+                                          image!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset('assets/image15.jpg',
+                                          fit: BoxFit.cover),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(58),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(25)),
-                  child: TabBar(
-                    overlayColor: MaterialStateProperty.all(Colors.transparent),
-                    dividerColor: Theme.of(context).scaffoldBackgroundColor,
-                    labelPadding: EdgeInsets.symmetric(horizontal: 4),
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    unselectedLabelColor: Colors.transparent,
-                    indicatorColor: Colors.transparent,
-                    indicatorWeight: 2.0,
-                    indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Theme.of(context).hoverColor,
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(58),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(25)),
+                      child: TabBar(
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        dividerColor: Theme.of(context).scaffoldBackgroundColor,
+                        labelPadding: EdgeInsets.symmetric(horizontal: 4),
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        unselectedLabelColor: Colors.transparent,
+                        indicatorColor: Colors.transparent,
+                        indicatorWeight: 2.0,
+                        indicator: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Theme.of(context).hoverColor,
+                        ),
+                        tabs: [
+                          Tab(
+                              child: Text('For you',
+                                  style: TextStyles.text2(context))),
+                          Tab(
+                              child: Text('Relax',
+                                  style: TextStyles.text2(context))),
+                          Tab(
+                              child: Text('Workout',
+                                  style: TextStyles.text2(context))),
+                          Tab(
+                              child: Text('Sad',
+                                  style: TextStyles.text2(context))),
+                          Tab(
+                              child: Text('Energize',
+                                  style: TextStyles.text2(context))),
+                        ],
+                      ),
                     ),
-                    tabs: [
-                      Tab(
-                          child: Text('For you',
-                              style: TextStyles.text2(context))),
-                      Tab(
-                          child:
-                              Text('Relax', style: TextStyles.text2(context))),
-                      Tab(
-                          child: Text('Workout',
-                              style: TextStyles.text2(context))),
-                      Tab(child: Text('Sad', style: TextStyles.text2(context))),
-                      Tab(
-                          child: Text('Energize',
-                              style: TextStyles.text2(context))),
-                    ],
                   ),
                 ),
               ),
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Stack(
-              children: [
-                Column(
+              body: SingleChildScrollView(
+                child: Stack(
                   children: [
-                    Container(
-                      height: 744,
-                      child: TabBarView(
-                        children: [
-                          For_You(),
-                          RelaxScreen(),
-                          WorkoutScreen(),
-                          SadScreen(),
-                          EnergizeScreen(),
-                        ],
-                      ),
+                    Column(
+                      children: [
+                        Container(
+                          height: 744,
+                          child: TabBarView(
+                            children: [
+                              For_You(),
+                              RelaxScreen(),
+                              WorkoutScreen(),
+                              SadScreen(),
+                              EnergizeScreen(),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
+              bottomNavigationBar: ButtomNavBar(),
             ),
-          ),
-          bottomNavigationBar: ButtomNavBar(),
-        ),
+          );
+        },
       ),
     );
   }
