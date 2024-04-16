@@ -24,17 +24,15 @@ class MiniPlayer extends ConsumerWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             child: Stack(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: constraints.maxWidth > 600 ? 20 : 20,
-                      top: constraints.maxHeight > 600 ? 8 : 8),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SongScreen()),
-                      );
-                    },
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SongScreen()),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
                       height: 50,
                       width: 50,
@@ -49,65 +47,57 @@ class MiniPlayer extends ConsumerWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 8.0),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SongScreen()),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: constraints.maxWidth > 600 ? 78 : 78,
-                            top: constraints.maxHeight > 600 ? 7 : 7),
-                        child: Container(
-                          width: 150,
-                          child: Text(
-                            selectedTrack.title_short,
-                            style: TextStyles.smalltext(context),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: constraints.maxWidth > 600 ? 78 : 78,
+                    top: constraints.maxHeight > 600 ? 7 : 7,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SongScreen()),
+                      );
+                    },
+                    child: Container(
+                      width: 150,
+                      child: Text(
+                        selectedTrack.title_short,
+                        style: TextStyles.smalltext(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SongScreen()),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: constraints.maxWidth > 600 ? 78 : 78,
-                            top: constraints.maxHeight > 600 ? 25 : 25),
-                        child: Container(
-                          width: 150,
-                          child: Text(
-                            selectedTrack.artist.name,
-                            style: TextStyles.smalltext2(context),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: constraints.maxHeight > 600 ? 5 : 5,
-                      left: constraints.maxWidth > 600 ? 690 : 370),
+                    left: constraints.maxWidth > 600 ? 78 : 78,
+                    top: constraints.maxHeight > 600 ? 25 : 25,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SongScreen()),
+                      );
+                    },
+                    child: Container(
+                      width: 150,
+                      child: Text(
+                        selectedTrack.artist.name,
+                        style: TextStyles.smalltext2(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: constraints.maxHeight > 600 ? 5 : 5,
+                    left: constraints.maxWidth > 600 ? 690 : 370,
+                  ),
                   child: IconButton(
                     onPressed: () async {
                       ref

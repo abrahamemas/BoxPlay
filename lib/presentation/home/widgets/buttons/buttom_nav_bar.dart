@@ -17,73 +17,71 @@ class _ButtomNavBarState extends State<ButtomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Stack(
-          children: [
-            Transform.translate(offset: Offset(0, -80), child: MiniPlayer()),
-            Transform.translate(
-                offset: Offset(0, 10),
-                child: NavigationBar(
-                  elevation: 0,
-                  shadowColor: Theme.of(context).scaffoldBackgroundColor,
-                  indicatorColor: Theme.of(context).scaffoldBackgroundColor,
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  selectedIndex: index,
-                  onDestinationSelected: (index) =>
-                      setState(() => this.index = index),
-                  destinations: [
-                    NavigationDestination(
-                        icon: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()),
-                            );
-                          },
-                          child: UrlPath(
-                            UrlPath1: 'assets/home2.svg',
-                            size: 24,
-                          ),
-                        ),
-                        label: 'Home'),
-                    NavigationDestination(
-                        icon: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SearchScreen()),
-                            );
-                          },
-                          child: UrlPath(
-                            UrlPath1: 'assets/search.svg',
-                            size: 24,
-                          ),
-                        ),
-                        label: 'Search'),
-                    NavigationDestination(
-                        icon: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Library()),
-                            );
-                          },
-                          child: UrlPath(
-                            UrlPath1: 'assets/library_music.svg',
-                            size: 24,
-                          ),
-                        ),
-                        label: 'Your Library')
-                  ],
-                )),
-          ],
-        ),
-      ],
+    return Padding(
+      padding:
+          const EdgeInsets.only(bottom: 16.0), // Add some padding at the bottom
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          MiniPlayer(),
+          NavigationBar(
+            elevation: 0,
+            shadowColor: Theme.of(context).scaffoldBackgroundColor,
+            indicatorColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            selectedIndex: index,
+            onDestinationSelected: (index) =>
+                setState(() => this.index = index),
+            destinations: [
+              NavigationDestination(
+                icon: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                  },
+                  child: UrlPath(
+                    UrlPath1: 'assets/home2.svg',
+                    size: 24,
+                  ),
+                ),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                icon: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SearchScreen()),
+                    );
+                  },
+                  child: UrlPath(
+                    UrlPath1: 'assets/search.svg',
+                    size: 24,
+                  ),
+                ),
+                label: 'Search',
+              ),
+              NavigationDestination(
+                icon: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Library()),
+                    );
+                  },
+                  child: UrlPath(
+                    UrlPath1: 'assets/library_music.svg',
+                    size: 24,
+                  ),
+                ),
+                label: 'Your Library',
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
